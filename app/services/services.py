@@ -41,8 +41,7 @@ async def investing_process(
 ) -> Union[CharityProject, Donation]:
     objects = await session.execute(
         select(model_add).where(model_add.fully_invested == 0
-                             ).order_by(model_add.create_date)
-    )
+                             ).order_by(model_add.create_date))
     invested_objects = objects.scalars().all()
     for inv in invested_objects:
         obj_in, inv = await investing_money(obj_in, inv)
