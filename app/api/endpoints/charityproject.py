@@ -50,8 +50,7 @@ async def create_charity_project(
 async def get_all_charity_projects(
     session: AsyncSession = Depends(get_async_session),
 ):
-    all_projects = await charityproject_crud.get_multi(session)
-    return all_projects
+    return await charityproject_crud.get_multi(session)
 
 
 @router.patch(
@@ -74,11 +73,9 @@ async def update_charity_project(
         await check_name_duplicate(obj_in.name, session)
     if obj_in.full_amount is not None:
         check_charity_project_invested_sum(project, obj_in.full_amount)
-
-    charity_project = await charityproject_crud.update(
+    return await charityproject_crud.update(
         project, obj_in, session
     )
-    return charity_project
 
 
 @router.delete(
@@ -96,7 +93,6 @@ async def delete_charity_project(
         project_id, session
     )
     check_charity_project_already_invested(project)
-    charity_project = await charityproject_crud.remove(
+    return await charityproject_crud.remove(
         project, session
     )
-    return charity_project

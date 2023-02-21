@@ -5,7 +5,7 @@ from sqlalchemy import Integer, Column, Boolean, DateTime
 from app.core.db import Base
 
 
-class AbstractClass(Base):
+class BaseClass(Base):
 
     __abstract__ = True
 
