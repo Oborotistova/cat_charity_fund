@@ -1,7 +1,7 @@
 from pydantic import BaseSettings
 
 
-MIN_PASS_LEN = 3 
+MIN_PASS_LEN = 3
 LIFETIME_SEC = 3600
 
 
