@@ -15,11 +15,9 @@ from app.core.config import settings
 from app.core.db import get_async_session
 from app.models.user import User
 from app.schemas.user import UserCreate
+from app.core.config import MIN_PASS_LEN, LIFETIME_SEC
 
 logger = logging.getLogger()
-
-
-MIN_PASS_LEN = 3
 
 
 async def get_user_db(session: AsyncSession = Depends(get_async_session)):
@@ -29,7 +27,7 @@ bearer_transport = BearerTransport(tokenUrl='auth/jwt/login')
 
 
 def get_jwt_strategy() -> JWTStrategy:
-    return JWTStrategy(secret=settings.secret, lifetime_seconds=3600)
+    return JWTStrategy(secret=settings.secret, lifetime_seconds=LIFETIME_SEC)
 
 
 auth_backend = AuthenticationBackend(
